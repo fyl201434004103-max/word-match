@@ -33,9 +33,10 @@
             border: 1px solid #e0e0e0;
         }
 
+        /* 全局字号加大两个级别 */
         h1 {
             text-align: center;
-            font-size: 1.6rem;
+            font-size: 2.2rem;
             margin: 0 0 5px;
             color: #222;
             letter-spacing: 1px;
@@ -48,11 +49,11 @@
             display: inline-block;
             width: auto;
             margin: 0 auto 15px;
-            padding: 6px 18px;
+            padding: 8px 22px;
             border-radius: 30px;
             color: #495057;
             font-weight: bold;
-            font-size: 0.8rem;
+            font-size: 1.0rem;
         }
 
         .info-bar {
@@ -60,22 +61,22 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 12px;
             background: #f8f9fa;
-            padding: 10px 18px;
+            padding: 12px 20px;
             border-radius: 40px;
             margin-bottom: 20px;
             border: 1px solid #dee2e6;
         }
 
         .level-box, .score-box, .timer-box {
-            padding: 6px 18px;
+            padding: 8px 22px;
             border-radius: 30px;
             font-weight: 800;
-            font-size: 0.9rem;
+            font-size: 1.1rem;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
         }
 
         .level-box, .score-box, .timer-box {
@@ -99,8 +100,8 @@
             background: #fff;
             border: 1px solid #ced4da;
             border-radius: 30px;
-            padding: 6px 12px;
-            font-size: 0.85rem;
+            padding: 8px 16px;
+            font-size: 1.0rem;
             font-weight: 600;
             font-family: inherit;
             color: #212529;
@@ -112,8 +113,8 @@
             background: #6c757d;
             border: none;
             color: white;
-            padding: 6px 20px;
-            font-size: 0.85rem;
+            padding: 8px 24px;
+            font-size: 1.0rem;
             font-weight: 600;
             border-radius: 30px;
             cursor: pointer;
@@ -125,13 +126,13 @@
         .message-area {
             background: #f8f9fa;
             text-align: center;
-            padding: 12px;
+            padding: 14px;
             border-radius: 40px;
             margin-bottom: 20px;
             font-weight: bold;
             color: #212529;
             border: 1px solid #dee2e6;
-            font-size: 0.9rem;
+            font-size: 1.05rem;
         }
 
         .cards-grid {
@@ -145,19 +146,20 @@
         .card {
             background: #ffffff;
             border-radius: 16px;
-            padding: 14px 4px;
+            padding: 16px 6px;
             text-align: center;
             font-weight: 700;
             cursor: pointer;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
             transition: all 0.15s ease;
             border: 1px solid #dee2e6;
-            font-size: 0.8rem;
+            font-size: 1.0rem;
             word-break: break-word;
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 80px;
+            min-height: 95px;
+            text-transform: lowercase; /* 强制小写 */
         }
 
         .card.word-card {
@@ -193,14 +195,14 @@
         .next-info {
             text-align: center;
             margin-top: 10px;
-            font-size: 0.9rem;
+            font-size: 1.05rem;
             font-weight: bold;
             background: #e9ecef;
             display: inline-block;
             width: auto;
             margin-left: auto;
             margin-right: auto;
-            padding: 6px 24px;
+            padding: 8px 28px;
             border-radius: 40px;
             color: #212529;
         }
@@ -208,14 +210,14 @@
         footer {
             text-align: center;
             margin-top: 18px;
-            font-size: 0.7rem;
+            font-size: 0.85rem;
             font-weight: 500;
             color: #6c757d;
             background: #f8f9fa;
             width: fit-content;
             margin-left: auto;
             margin-right: auto;
-            padding: 4px 16px;
+            padding: 6px 20px;
             border-radius: 30px;
         }
 
@@ -237,17 +239,17 @@
         .timeout-dialog {
             background: white;
             border-radius: 30px;
-            padding: 30px 40px;
+            padding: 35px 45px;
             text-align: center;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
             animation: slideUp 0.3s ease;
         }
 
         .timeout-dialog p {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: bold;
             color: #ff6b6b;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .timeout-dialog button {
@@ -255,8 +257,8 @@
             color: white;
             border: none;
             border-radius: 40px;
-            padding: 12px 30px;
-            font-size: 1.1rem;
+            padding: 14px 35px;
+            font-size: 1.3rem;
             font-weight: bold;
             cursor: pointer;
             font-family: inherit;
@@ -284,17 +286,17 @@
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(8px);
             border-radius: 40px;
-            padding: 6px 16px;
+            padding: 8px 18px;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
             box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
             border: 1px solid #e0e0e0;
             z-index: 100;
         }
 
         .music-info {
-            font-size: 0.75rem;
+            font-size: 0.9rem;
             font-weight: 600;
             color: #333;
         }
@@ -302,9 +304,9 @@
         .music-btn {
             background: none;
             border: none;
-            font-size: 1.1rem;
+            font-size: 1.3rem;
             cursor: pointer;
-            padding: 4px 8px;
+            padding: 6px 10px;
             border-radius: 50%;
             transition: background 0.2s;
             color: #555;
@@ -314,17 +316,17 @@
         }
 
         .volume-slider {
-            width: 60px;
-            height: 4px;
+            width: 70px;
+            height: 5px;
             -webkit-appearance: none;
             background: #ddd;
-            border-radius: 2px;
+            border-radius: 3px;
             outline: none;
         }
         .volume-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 12px;
-            height: 12px;
+            width: 14px;
+            height: 14px;
             border-radius: 50%;
             background: #2196f3;
             cursor: pointer;
@@ -338,9 +340,9 @@
             color: white;
             border: none;
             border-radius: 40px;
-            padding: 8px 18px;
+            padding: 10px 22px;
             cursor: pointer;
-            font-size: 0.8rem;
+            font-size: 0.95rem;
             font-weight: bold;
             z-index: 100;
             font-family: inherit;
@@ -355,44 +357,48 @@
                 gap: 8px;
             }
             .card {
-                padding: 10px 2px;
-                font-size: 0.7rem;
-                min-height: 65px;
+                padding: 12px 4px;
+                font-size: 0.85rem;
+                min-height: 75px;
             }
             h1 {
-                font-size: 1.3rem;
+                font-size: 1.6rem;
             }
             .level-box, .score-box, .timer-box {
-                font-size: 0.75rem;
-                padding: 4px 12px;
+                font-size: 0.9rem;
+                padding: 6px 14px;
             }
             .btn-reset {
-                padding: 5px 14px;
-                font-size: 0.75rem;
+                padding: 6px 18px;
+                font-size: 0.85rem;
             }
             .message-area {
-                font-size: 0.8rem;
+                font-size: 0.9rem;
             }
             .level-selector {
-                font-size: 0.7rem;
-                padding: 4px 8px;
+                font-size: 0.85rem;
+                padding: 6px 10px;
             }
             .music-player {
                 bottom: 10px;
                 left: 10px;
-                padding: 4px 10px;
+                padding: 5px 12px;
             }
             .download-btn {
                 bottom: 10px;
                 right: 10px;
-                padding: 6px 12px;
-                font-size: 0.7rem;
+                padding: 7px 14px;
+                font-size: 0.8rem;
             }
             .timeout-dialog {
-                padding: 20px 30px;
+                padding: 25px 35px;
             }
             .timeout-dialog p {
-                font-size: 1.2rem;
+                font-size: 1.4rem;
+            }
+            .timeout-dialog button {
+                padding: 10px 25px;
+                font-size: 1.1rem;
             }
         }
     </style>
@@ -400,17 +406,17 @@
 <body>
 <div class="game-container">
     <h1>📖 单词消消乐 · 倒计时挑战</h1>
-    <div style="text-align: center;"><span class="sub">UNIT 7 · UNIT 8 · UNIT 9 完整版</span></div>
+    <div style="text-align: center;"><span class="sub">unit 7 · unit 8 · unit 9 完整版</span></div>
 
     <div class="info-bar">
         <span class="level-box">第 <span id="levelNum">1</span> / <span id="totalLevels"></span> 关</span>
         <span class="score-box">✅ <span id="matchedCount">0</span> / <span id="totalPairs"></span></span>
-        <span class="timer-box" id="timerBox">⏱️ <span id="timerSeconds">40</span> 秒</span>
+        <span class="timer-box" id="timerBox">⏱️ <span id="timerSeconds">50</span> 秒</span>
         <select id="levelSelect" class="level-selector"></select>
-        <button class="btn-reset" id="resetGameBtn">🔄 重玩</button>
+        <button class="btn-reset" id="resetGameBtn">🔄 重玩本关</button>
     </div>
     <div class="message-area" id="messageBox">
-        💡 点击单词卡，再点击释义卡配对 | 40秒内完成挑战！
+        💡 点击单词卡，再点击释义卡配对 | 50秒内完成挑战！
     </div>
 
     <div id="cardsGrid" class="cards-grid"></div>
@@ -429,7 +435,6 @@
 
 <script>
     // ==================== 背景音乐 (轻柔放松) ====================
-    // 使用公开可用的轻音乐直链 (Kevin MacLeod 的公共版权音乐)
     const bgmUrl = "https://cdn.pixabay.com/download/audio/2022/01/18/audio_d046da1c6f.mp3";
     
     let audio = null;
@@ -541,52 +546,52 @@
         } catch(e) { console.log("enableSound error", e); }
     }
 
-    // ==================== 完整关卡数据 (UNIT 7 + 8 + 9，共25关) ====================
+    // ==================== 完整关卡数据 (所有单词已转为小写) ====================
     const levelsData = [
         // UNIT 7 ART (1-6)
-        { words: ["OPERA","BAND","PERFORMANCE","EXHIBITION","CLASSICAL","JAZZ","DRAMA","COMEDY","CALLIGRAPHY","PERFORMER","TALENTED","COMPONENT"],
+        { words: ["opera","band","performance","exhibition","classical","jazz","drama","comedy","calligraphy","performer","talented","component"],
           defs: ["歌剧","乐队","表演","展览","古典的","爵士乐","戏剧","喜剧","书法","表演者","有才能的","组成部分"] },
-        { words: ["COSTUME","SHADE","ATMOSPHERE","MONTHLY","UPLIFTING","MASTERPIECE","FIGURE","STARRY","MENTALLY","MASSIVE","BENEATH","AFFECT"],
+        { words: ["costume","shade","atmosphere","monthly","uplifting","masterpiece","figure","starry","mentally","massive","beneath","affect"],
           defs: ["戏装","阴影部分","气氛","每月地","令人振奋的","杰作","人像","布满星星的","精神上","巨大的","在下方","影响"] },
-        { words: ["SPOT","FAILURE","SCREAM","STRIKING","VIEWER","BURNING","CAUSE","EMPIRE","SCENE","MYSTERIOUS","VISUAL","REACTION"],
+        { words: ["spot","failure","scream","striking","viewer","burning","cause","empire","scene","mysterious","visual","reaction"],
           defs: ["斑点","失败","尖叫","惊人的","观看者","燃烧着的","导致","帝国","景色","神秘的","视觉的","反应"] },
-        { words: ["MALE","MASK","CLOWN","EMOTION","ACROBATICS","MASTER","REFER","PERFORM","PATTERN","OTHERWISE","CARRIAGE","COMPLEX"],
+        { words: ["male","mask","clown","emotion","acrobatics","master","refer","perform","pattern","otherwise","carriage","complex"],
           defs: ["男性的","面具","小丑","情感","杂技","精通","提到","表演","图案","否则","马车","复杂的"] },
-        { words: ["ASPECT","ORCHESTRA","GENIUS","SYMPHONY","MINOR","COMPOSER","PIANO","STRUGGLE","PROCEED","NOTE","SCORE","RESPOND"],
+        { words: ["aspect","orchestra","genius","symphony","minor","composer","piano","struggle","proceed","note","score","respond"],
           defs: ["方面","管弦乐队","天才","交响乐","小调的","作曲家","钢琴","奋斗","继续进行","音符","乐谱","回应"] },
-        { words: ["BACKSTAGE","TENSE","CONDUCTOR","HESITATE","CHARGE","JOYOUS","SIGNAL","BROAD","COMPOSE","ADVERTISEMENT","YOUTH","CONTEST"],
+        { words: ["backstage","tense","conductor","hesitate","charge","joyous","signal","broad","compose","advertisement","youth","contest"],
           defs: ["后台的","紧张的","指挥","犹豫","负责","欢乐的","标志着","宽阔的","作曲","广告","青少年","比赛"] },
         // UNIT 8 GREEN LIVING (7-12)
-        { words: ["MARTIAL ARTS","MADAM","DOCUMENTARY","CURRENTLY","ACCEPTABLE","INDIVIDUAL","APPRECIATE","FAITHFULLY","EXPRESSIVE","ARTISTIC","EXTENSIVELY","SYMBOLISM"],
+        { words: ["martial arts","madam","documentary","currently","acceptable","individual","appreciate","faithfully","expressive","artistic","extensively","symbolism"],
           defs: ["武术","女士","纪录片","当前","可接受的","个人","感激","忠诚地","富于感情的","艺术的","广泛地","象征主义"] },
-        { words: ["SCULPTOR","ADMIRATION","TAP","TISSUE","OCEAN","SMOG","DESERT","GLOBAL","INDUSTRIAL","EXTINCTION","SOLUTION","ELECTRICITY"],
+        { words: ["sculptor","admiration","tap","tissue","ocean","smog","desert","global","industrial","extinction","solution","electricity"],
           defs: ["雕刻家","敬佩","龙头","纸巾","海洋","雾霾","沙漠","全球的","工业的","灭绝","解决办法","电"] },
-        { words: ["TRANSPORT","RECYCLE","BATTERY","CARBON","BALANCE","FLAT","ROOT","SHOOT","BOTHER","INSTITUTE","CHIMPANZEE","FIRM"],
+        { words: ["transport","recycle","battery","carbon","balance","flat","root","shoot","bother","institute","chimpanzee","firm"],
           defs: ["交通运输","回收利用","电池","碳","平衡","公寓","树根","嫩枝","费心","机构","黑猩猩","稳固的"] },
-        { words: ["FOUNDATION","BRICK","INVOLVE","POSTER","FOUNDER","PROFIT","PM","ORGANISER","UNION","CONTENTED","OCCUR","AGRICULTURE"],
+        { words: ["foundation","brick","involve","poster","founder","profit","pm","organiser","union","contented","occur","agriculture"],
           defs: ["基础","砖","参与","海报","创办人","盈利","下午","组织者","联合会","满意的","发生","农业"] },
-        { words: ["PROPOSAL","REGION","SLIM","SURVIVAL","RATE","QUOTE","HEADSTONE","OVERCOME","DETERMINATION","FORMER","CURRENT","COUNTY"],
+        { words: ["proposal","region","slim","survival","rate","quote","headstone","overcome","determination","former","current","county"],
           defs: ["建议","地区","微小的","幸存","比率","引文","墓碑","克服","决心","以前的","当前的","县"] },
-        { words: ["ORDINARY","PARKING","THEREFORE","PATH","DISAPPEAR","TRACKING","DESTINATION","RESIDENT","OFFICIAL","ATTITUDE","DIAGRAM","PERCENTAGE"],
+        { words: ["ordinary","parking","therefore","path","disappear","tracking","destination","resident","official","attitude","diagram","percentage"],
           defs: ["普通的","停放","因此","小径","消失","跟踪","目的地","居民","官员","看法","图解","百分比"] },
         // UNIT 9 LEARNING (13-25)
-        { words: ["APPROACH","GEOMETRY","PARTNER","BRUSH UP ON","REFLECT","REFLECT ON","ARGUE","ARGUE WITH","ASSUME","AUTOMATIC","INNER","OUTER"],
+        { words: ["approach","geometry","partner","brush up on","reflect","reflect on","argue","argue with","assume","automatic","inner","outer"],
           defs: ["方法","几何学","搭档","温习","仔细思考","思考","争论","争吵","认为","自动的","内部的","外部的"] },
-        { words: ["FLEXIBLE","END UP DOING","PROMOTE","WORK OUT","IN SHORT","ATTEMPT TO","AT THE HEART OF","UNLIKELY","BE BASED ON","DINOSAUR","EXIST","DATA"],
+        { words: ["flexible","end up doing","promote","work out","in short","attempt to","at the heart of","unlikely","be based on","dinosaur","exist","data"],
           defs: ["灵活的","最后","促进","弄懂","总而言之","尝试","在中心","不大可能的","以根据","恐龙","存在","资料"] },
-        { words: ["IGNORE","IMPRESSION","SIMPLIFIED","CLASSIC","UNFAMILIAR","MEMORISE","STRATEGY","EFFECTIVELY","BEYOND","RECOMMEND","NOVEL","SUFFICIENT"],
+        { words: ["ignore","impression","simplified","classic","unfamiliar","memorise","strategy","effectively","beyond","recommend","novel","sufficient"],
           defs: ["忽视","印象","简化了的","经典的","不熟悉的","记住","策略","有效地","超出范围","推荐","小说","充足的"] },
-        { words: ["INPUT","NORMALLY","CONTEXT","CHUNK","ACQUIRE","BE HONOURED TO DO STH","ODD","SOCCER","SUBWAY","IN ONE WAY OR ANOTHER","WORLDWIDE","ARRANGEMENT"],
+        { words: ["input","normally","context","chunk","acquire","be honoured to do sth","odd","soccer","subway","in one way or another","worldwide","arrangement"],
           defs: ["输入","通常","上下文","语块","学习","很荣幸做某事","奇特的","足球","地铁","不管怎样","在全世界","计划"] },
-        { words: ["CHILDHOOD","EMOTIONAL","EXCITEMENT","AS A RESULT","PHOTOGRAPHIC","DIGIT","PI","HELICOPTER","PUBLISH","CURVE","SHARP","TIMELY"],
+        { words: ["childhood","emotional","excitement","as a result","photographic","digit","pi","helicopter","publish","curve","sharp","timely"],
           defs: ["童年","情感上的","兴奋","作为结果","详细准确的","数字","圆周率","直升机","出版","曲线","急剧的","适时的"] },
-        { words: ["CELL","PERIODICALLY","TAKE IT EASY","MEMORISATION","TECHNIQUE","REFLECTION","REFLECTIVE","JOURNAL","MOREOVER","SURFING","SEAFOOD","GAP"],
+        { words: ["cell","periodically","take it easy","memorisation","technique","reflection","reflective","journal","moreover","surfing","seafood","gap"],
           defs: ["细胞","定期地","放松","记忆","技巧","沉思","深思的","日记","此外","冲浪","海鲜","差距"] },
-        { words: ["GENDER","IDENTICAL","COMIC","ADVENTURE","FICTION","EVIDENCE","EXPOSE","OUTCOME","TAKE PART IN","CUT BACK ON","PACKAGING","PLASTIC"],
+        { words: ["gender","identical","comic","adventure","fiction","evidence","expose","outcome","take part in","cut back on","packaging","plastic"],
           defs: ["性别","完全相同的","连环漫画","冒险","小说","证据","使接触","结果","参加","削减","包装材料","塑料制的"] },
-        { words: ["HONEY","BUTTER","YOGHURT","CONTAINER","MAJORITY","AIR CONDITIONING","SUM","TO SUM UP","INDICATE","LANDFILL","FOOTWEAR","WASTE-TO-ENERGY"],
+        { words: ["honey","butter","yoghurt","container","majority","air conditioning","sum","to sum up","indicate","landfill","footwear","waste-to-energy"],
           defs: ["蜂蜜","黄油","酸奶","容器","大多数","空调系统","概括","总之","表明","废弃物填埋场","鞋类","以垃圾作为能源的"] },
-        { words: ["CLEAN-BURNING","BUILD-UP","POLLUTANT","FLOODING","OVERFLOW","WORK THROUGH"],
+        { words: ["clean-burning","build-up","pollutant","flooding","overflow","work through"],
           defs: ["清洁焚烧的","增长","污染物","洪水泛滥","满是","调整情绪"] }
     ];
 
@@ -597,7 +602,7 @@
     let matchedCountCurr = 0;
     let lock = false;
     let timerInterval = null;
-    let timeLeft = 40;          // 倒计时 40 秒
+    let timeLeft = 50;          // 倒计时 50 秒
     let isTimeoutShowing = false;
 
     const levelSelect = document.getElementById('levelSelect');
@@ -616,14 +621,13 @@
 
     function startTimer() {
         stopTimer();
-        timeLeft = 40;
+        timeLeft = 50;
         timerSecondsSpan.innerText = timeLeft;
         timerBox.classList.remove('warning');
         
         timerInterval = setInterval(() => {
-            if (lock) return; // 动画或配对过程中不减少时间
+            if (lock) return;
             if (timeLeft <= 1) {
-                // 时间到
                 stopTimer();
                 if (!isTimeoutShowing && matchedCountCurr < levelsData[currentLevel].words.length) {
                     showTimeoutDialog();
@@ -658,7 +662,6 @@
         document.getElementById('continueBtn').addEventListener('click', () => {
             overlay.remove();
             isTimeoutShowing = false;
-            // 刷新当前关卡（洗牌重置）
             resetCurrentLevel();
         });
     }
@@ -683,6 +686,7 @@
         return shuffleArray(pairs);
     }
 
+    // 重置当前关卡（从当前关卡开始，洗牌）
     function resetCurrentLevel() {
         stopTimer();
         selectedCardId = null;
@@ -694,6 +698,11 @@
         showMessage(`🃏 卡片已重新洗牌！继续挑战第 ${currentLevel+1} 关`, false);
     }
 
+    // 重玩按钮功能：从当前关卡开始（洗牌重置）
+    function restartCurrentLevel() {
+        resetCurrentLevel();
+    }
+
     function showMessage(msg, isError) {
         const msgBox = document.getElementById('messageBox');
         msgBox.innerHTML = msg;
@@ -701,7 +710,7 @@
         msgBox.style.color = isError ? '#721c24' : '#155724';
         setTimeout(() => {
             if (document.getElementById('messageBox').innerHTML === msg) {
-                document.getElementById('messageBox').innerHTML = '💡 点击单词卡，再点击释义卡配对 | 40秒内完成挑战！';
+                document.getElementById('messageBox').innerHTML = '💡 点击单词卡，再点击释义卡配对 | 50秒内完成挑战！';
                 document.getElementById('messageBox').style.background = '#f8f9fa';
                 document.getElementById('messageBox').style.color = '#212529';
             }
@@ -784,7 +793,7 @@
             selectedCard.matched = true;
             clickedCard.matched = true;
             matchedCountCurr++;
-            playJumpSound();  // 马里奥跳跃音效
+            playJumpSound();
             selectedCardId = null;
             renderGame();
             lock = false;
@@ -806,10 +815,6 @@
         renderGame();
         startTimer();
         showMessage(`✨ 已跳转到第 ${currentLevel+1} 关 ✨`, false);
-    }
-
-    function resetFullGame() {
-        goToLevel(0);
     }
 
     function initLevelSelect() {
@@ -843,7 +848,8 @@
         showMessage('📥 游戏文件已开始下载！', false);
     }
 
-    resetBtn.addEventListener('click', resetFullGame);
+    // 绑定事件：重玩按钮调用 restartCurrentLevel（从当前关卡开始）
+    resetBtn.addEventListener('click', restartCurrentLevel);
     downloadBtn.addEventListener('click', downloadGame);
 
     // 首次点击页面任意位置启用音乐和音效
