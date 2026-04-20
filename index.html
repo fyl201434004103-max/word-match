@@ -10,6 +10,13 @@
             font-family: 'Comic Neue', 'Segoe UI', cursive;
             text-align: center;
             padding: 40px 20px;
+            min-height: 100vh;
+            margin: 0;
+        }
+        h1 {
+            color: #ff5722;
+            text-shadow: 3px 3px 0 #ffe0a3;
+            font-size: 2rem;
         }
         .game-list {
             display: flex;
@@ -17,38 +24,46 @@
             justify-content: center;
             gap: 20px;
             max-width: 800px;
-            margin: 0 auto;
+            margin: 30px auto;
         }
         .game-card {
             background: white;
-            border-radius: 40px;
-            padding: 20px 30px;
+            border-radius: 50px;
+            padding: 20px 35px;
             box-shadow: 0 12px 20px rgba(0,0,0,0.2);
             text-decoration: none;
             color: #b45f06;
             font-weight: bold;
             font-size: 1.3rem;
-            transition: transform 0.2s;
+            transition: all 0.2s;
             display: inline-block;
+            border: 2px solid #ffcf9a;
         }
         .game-card:hover {
             transform: scale(1.05);
             background: #ffe6c7;
         }
-        h1 {
-            color: #ff5722;
-            text-shadow: 2px 2px 0 #ffe0a3;
+        .emoji {
+            font-size: 1.8rem;
+            margin-right: 10px;
+        }
+        footer {
+            margin-top: 50px;
+            color: #b68b5a;
         }
     </style>
 </head>
 <body>
     <h1>🍭 单词消消乐 · 游戏合集 🎮</h1>
+    <p>👇 点击任意游戏开始配对 👇</p>
     <div class="game-list">
-        <a href="compulsory.html" class="game-card">必修3</a>
-        <a href="game_animals.html" class="game-card">🐘 动物乐园</a>
-        <a href="game_food.html" class="game-card">🍕 美食天地</a>
-        <!-- 想加多少加多少 -->
+        <a href="index.html" class="game-card">
+            <span class="emoji">📖</span> UNIT 7-9 经典关
+        </a>
+        <a href="game_animals.html" class="game-card">
+            <span class="emoji">🐘</span> 动物乐园
+        </a>
     </div>
-    <p style="margin-top: 40px; color: #b68b5a;">⭐ 点击任意游戏，开始配对！⭐</p>
+    <footer>⭐ 点击单词，再点击释义（或反过来），配对正确就消除！ ⭐</footer>
 </body>
 </html>
