@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>单词消消乐 · 倒计时挑战版</title>
+    <title>单词消消乐 · 灵魂词汇挑战</title>
     <style>
         * {
             box-sizing: border-box;
@@ -33,10 +33,9 @@
             border: 1px solid #e0e0e0;
         }
 
-        /* 全局字号加大两个级别 */
         h1 {
             text-align: center;
-            font-size: 2.2rem;
+            font-size: 1.8rem;
             margin: 0 0 5px;
             color: #222;
             letter-spacing: 1px;
@@ -49,11 +48,11 @@
             display: inline-block;
             width: auto;
             margin: 0 auto 15px;
-            padding: 8px 22px;
+            padding: 6px 18px;
             border-radius: 30px;
             color: #495057;
             font-weight: bold;
-            font-size: 1.0rem;
+            font-size: 0.85rem;
         }
 
         .info-bar {
@@ -61,22 +60,22 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 10px;
             background: #f8f9fa;
-            padding: 12px 20px;
+            padding: 10px 18px;
             border-radius: 40px;
             margin-bottom: 20px;
             border: 1px solid #dee2e6;
         }
 
         .level-box, .score-box, .timer-box {
-            padding: 8px 22px;
+            padding: 6px 18px;
             border-radius: 30px;
             font-weight: 800;
-            font-size: 1.1rem;
+            font-size: 1rem;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
 
         .level-box, .score-box, .timer-box {
@@ -100,8 +99,8 @@
             background: #fff;
             border: 1px solid #ced4da;
             border-radius: 30px;
-            padding: 8px 16px;
-            font-size: 1.0rem;
+            padding: 6px 12px;
+            font-size: 0.9rem;
             font-weight: 600;
             font-family: inherit;
             color: #212529;
@@ -113,8 +112,8 @@
             background: #6c757d;
             border: none;
             color: white;
-            padding: 8px 24px;
-            font-size: 1.0rem;
+            padding: 6px 20px;
+            font-size: 0.9rem;
             font-weight: 600;
             border-radius: 30px;
             cursor: pointer;
@@ -126,40 +125,40 @@
         .message-area {
             background: #f8f9fa;
             text-align: center;
-            padding: 14px;
+            padding: 12px;
             border-radius: 40px;
             margin-bottom: 20px;
             font-weight: bold;
             color: #212529;
             border: 1px solid #dee2e6;
-            font-size: 1.05rem;
+            font-size: 0.95rem;
         }
 
         .cards-grid {
             display: grid;
-            grid-template-rows: repeat(4, auto);
-            grid-template-columns: repeat(6, 1fr);
-            gap: 12px;
+            grid-template-rows: repeat(6, auto);
+            grid-template-columns: repeat(8, 1fr);
+            gap: 10px;
             margin-bottom: 20px;
         }
 
         .card {
             background: #ffffff;
-            border-radius: 16px;
-            padding: 16px 6px;
+            border-radius: 14px;
+            padding: 12px 3px;
             text-align: center;
             font-weight: 700;
             cursor: pointer;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
             transition: all 0.15s ease;
             border: 1px solid #dee2e6;
-            font-size: 1.0rem;
+            font-size: 0.8rem;
             word-break: break-word;
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 95px;
-            text-transform: lowercase; /* 强制小写 */
+            min-height: 70px;
+            text-transform: lowercase;
         }
 
         .card.word-card {
@@ -195,14 +194,14 @@
         .next-info {
             text-align: center;
             margin-top: 10px;
-            font-size: 1.05rem;
+            font-size: 0.9rem;
             font-weight: bold;
             background: #e9ecef;
             display: inline-block;
             width: auto;
             margin-left: auto;
             margin-right: auto;
-            padding: 8px 28px;
+            padding: 6px 24px;
             border-radius: 40px;
             color: #212529;
         }
@@ -210,18 +209,17 @@
         footer {
             text-align: center;
             margin-top: 18px;
-            font-size: 0.85rem;
+            font-size: 0.7rem;
             font-weight: 500;
             color: #6c757d;
             background: #f8f9fa;
             width: fit-content;
             margin-left: auto;
             margin-right: auto;
-            padding: 6px 20px;
+            padding: 4px 16px;
             border-radius: 30px;
         }
 
-        /* 超时弹窗样式 */
         .timeout-overlay {
             position: fixed;
             top: 0;
@@ -239,17 +237,17 @@
         .timeout-dialog {
             background: white;
             border-radius: 30px;
-            padding: 35px 45px;
+            padding: 30px 40px;
             text-align: center;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
             animation: slideUp 0.3s ease;
         }
 
         .timeout-dialog p {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: bold;
             color: #ff6b6b;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         .timeout-dialog button {
@@ -257,8 +255,8 @@
             color: white;
             border: none;
             border-radius: 40px;
-            padding: 14px 35px;
-            font-size: 1.3rem;
+            padding: 12px 30px;
+            font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
             font-family: inherit;
@@ -286,17 +284,17 @@
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(8px);
             border-radius: 40px;
-            padding: 8px 18px;
+            padding: 6px 16px;
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
             box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
             border: 1px solid #e0e0e0;
             z-index: 100;
         }
 
         .music-info {
-            font-size: 0.9rem;
+            font-size: 0.75rem;
             font-weight: 600;
             color: #333;
         }
@@ -304,9 +302,9 @@
         .music-btn {
             background: none;
             border: none;
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             cursor: pointer;
-            padding: 6px 10px;
+            padding: 4px 8px;
             border-radius: 50%;
             transition: background 0.2s;
             color: #555;
@@ -316,17 +314,17 @@
         }
 
         .volume-slider {
-            width: 70px;
-            height: 5px;
+            width: 60px;
+            height: 4px;
             -webkit-appearance: none;
             background: #ddd;
-            border-radius: 3px;
+            border-radius: 2px;
             outline: none;
         }
         .volume-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 14px;
-            height: 14px;
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
             background: #2196f3;
             cursor: pointer;
@@ -340,9 +338,9 @@
             color: white;
             border: none;
             border-radius: 40px;
-            padding: 10px 22px;
+            padding: 8px 18px;
             cursor: pointer;
-            font-size: 0.95rem;
+            font-size: 0.8rem;
             font-weight: bold;
             z-index: 100;
             font-family: inherit;
@@ -352,61 +350,67 @@
             opacity: 0.8;
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 800px) {
             .cards-grid {
+                grid-template-columns: repeat(4, 1fr);
                 gap: 8px;
             }
             .card {
-                padding: 12px 4px;
-                font-size: 0.85rem;
-                min-height: 75px;
+                padding: 10px 2px;
+                font-size: 0.7rem;
+                min-height: 60px;
             }
+        }
+
+        @media (max-width: 500px) {
+            .cards-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
             h1 {
-                font-size: 1.6rem;
+                font-size: 1.5rem;
             }
             .level-box, .score-box, .timer-box {
-                font-size: 0.9rem;
-                padding: 6px 14px;
+                font-size: 0.8rem;
+                padding: 4px 12px;
             }
             .btn-reset {
-                padding: 6px 18px;
-                font-size: 0.85rem;
+                padding: 5px 16px;
+                font-size: 0.8rem;
             }
             .message-area {
-                font-size: 0.9rem;
+                font-size: 0.8rem;
             }
             .level-selector {
-                font-size: 0.85rem;
-                padding: 6px 10px;
+                font-size: 0.75rem;
+                padding: 4px 8px;
             }
             .music-player {
                 bottom: 10px;
                 left: 10px;
-                padding: 5px 12px;
+                padding: 4px 10px;
             }
             .download-btn {
                 bottom: 10px;
                 right: 10px;
-                padding: 7px 14px;
-                font-size: 0.8rem;
+                padding: 6px 12px;
+                font-size: 0.7rem;
             }
             .timeout-dialog {
-                padding: 25px 35px;
+                padding: 20px 30px;
             }
             .timeout-dialog p {
-                font-size: 1.4rem;
-            }
-            .timeout-dialog button {
-                padding: 10px 25px;
-                font-size: 1.1rem;
+                font-size: 1.2rem;
             }
         }
     </style>
 </head>
 <body>
 <div class="game-container">
-    <h1>📖 单词消消乐 · 倒计时挑战</h1>
-    <div style="text-align: center;"><span class="sub">unit 7 · unit 8 · unit 9 完整版</span></div>
+    <h1>📖 单词消消乐 · 灵魂词汇</h1>
+    <div style="text-align: center;"><span class="sub">每关12对单词 · 灵魂觉醒挑战</span></div>
 
     <div class="info-bar">
         <span class="level-box">第 <span id="levelNum">1</span> / <span id="totalLevels"></span> 关</span>
@@ -424,7 +428,6 @@
     <footer>🎯 全部配对自动下一关 | 超时弹出继续窗口 | 配对错误会重新洗牌</footer>
 </div>
 
-<!-- 音乐播放器 -->
 <div class="music-player" id="musicPlayer">
     <div class="music-info">🎵 轻柔学习音乐</div>
     <button class="music-btn" id="playPauseBtn">⏸</button>
@@ -434,7 +437,7 @@
 <button class="download-btn" id="downloadBtn">⬇️ 下载本游戏</button>
 
 <script>
-    // ==================== 背景音乐 (轻柔放松) ====================
+    // ==================== 背景音乐 ====================
     const bgmUrl = "https://cdn.pixabay.com/download/audio/2022/01/18/audio_d046da1c6f.mp3";
     
     let audio = null;
@@ -455,7 +458,6 @@
             isPlaying = true;
             document.getElementById('playPauseBtn').innerText = '⏸';
         }).catch(e => {
-            console.log("自动播放被阻止，需要用户交互");
             isPlaying = false;
             document.getElementById('playPauseBtn').innerText = '▶';
         });
@@ -471,43 +473,26 @@
 
     function togglePlay() {
         if (!audio) initAudio();
-        if (isPlaying) {
-            pauseMusic();
-        } else {
-            playMusic();
-        }
+        if (isPlaying) pauseMusic();
+        else playMusic();
     }
 
     function setVolume(val) {
         volume = val;
-        if (audio) {
-            audio.volume = volume / 100;
-        }
+        if (audio) audio.volume = volume / 100;
         document.getElementById('volumeSlider').value = volume;
-        if (volume === 0) {
-            isMuted = true;
-            document.getElementById('muteBtn').innerText = '🔇';
-        } else {
-            isMuted = false;
-            document.getElementById('muteBtn').innerText = '🔊';
-        }
+        document.getElementById('muteBtn').innerText = volume === 0 ? '🔇' : '🔊';
     }
 
     function toggleMute() {
-        if (isMuted) {
-            setVolume(40);
-        } else {
-            setVolume(0);
-        }
+        setVolume(volume === 0 ? 40 : 0);
     }
 
     document.getElementById('playPauseBtn').addEventListener('click', togglePlay);
-    document.getElementById('volumeSlider').addEventListener('input', (e) => {
-        setVolume(parseInt(e.target.value));
-    });
+    document.getElementById('volumeSlider').addEventListener('input', (e) => setVolume(parseInt(e.target.value)));
     document.getElementById('muteBtn').addEventListener('click', toggleMute);
 
-    // ==================== 音效系统 (超级玛丽跳跃音效) ====================
+    // ==================== 马里奥跳跃音效 ====================
     let audioCtx = null;
     let soundAllowed = false;
 
@@ -527,7 +512,7 @@
             gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.25);
             osc.start();
             osc.stop(now + 0.25);
-        } catch(e) { console.log("jump sound error", e); }
+        } catch(e) {}
     }
 
     function enableSound() {
@@ -543,11 +528,11 @@
             osc.stop(audioCtx.currentTime + 0.01);
             audioCtx.resume();
             soundAllowed = true;
-        } catch(e) { console.log("enableSound error", e); }
+        } catch(e) {}
     }
 
-    // ==================== 完整关卡数据 (所有单词已转为小写) ====================
-    const levelsData = [
+    // ==================== 单词词库 (共60对，每关12对，共5关) ====================
+    const FULL_PAIRS = [
         { en: "efforts", zh: "努力" },
         { en: "achievements", zh: "成就" },
         { en: "expectations", zh: "期望" },
@@ -610,6 +595,18 @@
         { en: "torn down", zh: "拆毁 / 拆除" }
     ];
 
+    // 构建关卡数据：每关12对（24个单词），共5关（60对）
+    const PAIRS_PER_LEVEL = 12;
+    const levelsData = [];
+    for (let i = 0; i < FULL_PAIRS.length; i += PAIRS_PER_LEVEL) {
+        const chunk = FULL_PAIRS.slice(i, i + PAIRS_PER_LEVEL);
+        if (chunk.length > 0) {
+            levelsData.push({
+                words: chunk.map(p => p.en),
+                defs: chunk.map(p => p.zh)
+            });
+        }
+    }
 
     // ==================== 游戏状态 ====================
     let currentLevel = 0;
@@ -618,7 +615,7 @@
     let matchedCountCurr = 0;
     let lock = false;
     let timerInterval = null;
-    let timeLeft = 50;          // 倒计时 50 秒
+    let timeLeft = 50;  // 每关50秒
     let isTimeoutShowing = false;
 
     const levelSelect = document.getElementById('levelSelect');
@@ -627,12 +624,8 @@
     const timerSecondsSpan = document.getElementById('timerSeconds');
     const timerBox = document.getElementById('timerBox');
 
-    // 倒计时控制
     function stopTimer() {
-        if (timerInterval) {
-            clearInterval(timerInterval);
-            timerInterval = null;
-        }
+        if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
     }
 
     function startTimer() {
@@ -640,7 +633,6 @@
         timeLeft = 50;
         timerSecondsSpan.innerText = timeLeft;
         timerBox.classList.remove('warning');
-        
         timerInterval = setInterval(() => {
             if (lock) return;
             if (timeLeft <= 1) {
@@ -651,30 +643,19 @@
             } else {
                 timeLeft--;
                 timerSecondsSpan.innerText = timeLeft;
-                if (timeLeft <= 5) {
-                    timerBox.classList.add('warning');
-                } else {
-                    timerBox.classList.remove('warning');
-                }
+                if (timeLeft <= 5) timerBox.classList.add('warning');
+                else timerBox.classList.remove('warning');
             }
         }, 1000);
     }
 
-    // 显示超时弹窗
     function showTimeoutDialog() {
         if (isTimeoutShowing) return;
         isTimeoutShowing = true;
-        
         const overlay = document.createElement('div');
         overlay.className = 'timeout-overlay';
-        overlay.innerHTML = `
-            <div class="timeout-dialog">
-                <p>⏰ Keep Going!</p>
-                <button id="continueBtn">继续挑战</button>
-            </div>
-        `;
+        overlay.innerHTML = `<div class="timeout-dialog"><p>⏰ Keep Going!</p><button id="continueBtn">继续挑战</button></div>`;
         document.body.appendChild(overlay);
-        
         document.getElementById('continueBtn').addEventListener('click', () => {
             overlay.remove();
             isTimeoutShowing = false;
@@ -682,7 +663,6 @@
         });
     }
 
-    // 洗牌和重置
     function shuffleArray(arr) {
         for (let i = arr.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -702,7 +682,6 @@
         return shuffleArray(pairs);
     }
 
-    // 重置当前关卡（从当前关卡开始，洗牌）
     function resetCurrentLevel() {
         stopTimer();
         selectedCardId = null;
@@ -712,11 +691,6 @@
         renderGame();
         startTimer();
         showMessage(`🃏 卡片已重新洗牌！继续挑战第 ${currentLevel+1} 关`, false);
-    }
-
-    // 重玩按钮功能：从当前关卡开始（洗牌重置）
-    function restartCurrentLevel() {
-        resetCurrentLevel();
     }
 
     function showMessage(msg, isError) {
@@ -739,10 +713,7 @@
         document.getElementById('matchedCount').innerText = matchedCountCurr;
         document.getElementById('levelNum').innerText = currentLevel + 1;
         document.getElementById('totalLevels').innerText = levelsData.length;
-
-        if (levelSelect.value != currentLevel) {
-            levelSelect.value = currentLevel;
-        }
+        if (levelSelect.value != currentLevel) levelSelect.value = currentLevel;
 
         const grid = document.getElementById('cardsGrid');
         grid.innerHTML = '';
@@ -752,13 +723,8 @@
             if (card.matched) cardDiv.classList.add('matched');
             if (selectedCardId === card.id && !card.matched) cardDiv.classList.add('selected');
             cardDiv.innerText = card.text;
-            cardDiv.addEventListener('click', (e) => {
-                e.stopPropagation();
-                if (lock) return;
-                if (card.matched) {
-                    showMessage('🎈 这个词已经配对过啦！', false);
-                    return;
-                }
+            cardDiv.addEventListener('click', () => {
+                if (lock || card.matched) return;
                 handleCardClick(card.id);
             });
             grid.appendChild(cardDiv);
@@ -770,11 +736,7 @@
         } else if (matchedCountCurr === totalPairs) {
             document.getElementById('nextInfo').innerHTML = '🎉 完成！进入下一关... 🎉';
             stopTimer();
-            setTimeout(() => {
-                if (currentLevel + 1 < levelsData.length) {
-                    goToLevel(currentLevel + 1);
-                }
-            }, 1000);
+            setTimeout(() => { if (currentLevel + 1 < levelsData.length) goToLevel(currentLevel + 1); }, 1000);
         } else {
             document.getElementById('nextInfo').innerHTML = '';
         }
@@ -783,26 +745,22 @@
     function handleCardClick(clickedId) {
         const clickedCard = currentPairs.find(c => c.id === clickedId);
         if (!clickedCard || clickedCard.matched) return;
-
         if (selectedCardId === null) {
             selectedCardId = clickedCard.id;
             renderGame();
             return;
         }
-
         const selectedCard = currentPairs.find(c => c.id === selectedCardId);
         if (!selectedCard || selectedCard.matched) {
             selectedCardId = null;
             handleCardClick(clickedId);
             return;
         }
-
         if (selectedCard.id === clickedCard.id) {
             selectedCardId = null;
             renderGame();
             return;
         }
-
         const isMatch = (selectedCard.pairIndex === clickedCard.pairIndex && selectedCard.type !== clickedCard.type);
         if (isMatch) {
             lock = true;
@@ -838,15 +796,13 @@
         for (let i = 0; i < levelsData.length; i++) {
             const option = document.createElement('option');
             option.value = i;
-            option.textContent = `第 ${i+1} 关 (${levelsData[i].words.length}词)`;
+            option.textContent = `第 ${i+1} 关 (${levelsData[i].words.length}对)`;
             levelSelect.appendChild(option);
         }
         levelSelect.value = 0;
         levelSelect.addEventListener('change', (e) => {
             const newLevel = parseInt(e.target.value);
-            if (!isNaN(newLevel) && newLevel !== currentLevel) {
-                goToLevel(newLevel);
-            }
+            if (!isNaN(newLevel) && newLevel !== currentLevel) goToLevel(newLevel);
         });
     }
 
@@ -856,7 +812,7 @@
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'word_match_game.html';
+        a.download = 'word_match_game_soul.html';
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
@@ -864,19 +820,13 @@
         showMessage('📥 游戏文件已开始下载！', false);
     }
 
-    // 绑定事件：重玩按钮调用 restartCurrentLevel（从当前关卡开始）
-    resetBtn.addEventListener('click', restartCurrentLevel);
+    resetBtn.addEventListener('click', () => resetCurrentLevel());
     downloadBtn.addEventListener('click', downloadGame);
 
-    // 首次点击页面任意位置启用音乐和音效
     document.body.addEventListener('click', () => {
         enableSound();
-        if (!audio) {
-            initAudio();
-            playMusic();
-        } else if (!isPlaying) {
-            playMusic();
-        }
+        if (!audio) { initAudio(); playMusic(); }
+        else if (!isPlaying) playMusic();
     }, { once: true });
 
     initLevelSelect();
