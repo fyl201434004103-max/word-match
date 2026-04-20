@@ -134,7 +134,6 @@
             font-size: 1.05rem;
         }
 
-        /* 四行六列网格布局 */
         .cards-grid {
             display: grid;
             grid-template-rows: repeat(4, auto);
@@ -351,7 +350,6 @@
             opacity: 0.8;
         }
 
-        /* 手机小屏幕适配 */
         @media (max-width: 600px) {
             .cards-grid {
                 gap: 8px;
@@ -402,7 +400,6 @@
             }
         }
 
-        /* 横屏适配 */
         @media (orientation: landscape) and (max-height: 500px) {
             .cards-grid {
                 gap: 6px;
@@ -424,7 +421,7 @@
 <body>
 <div class="game-container">
     <h1>📖 单词消消乐 · 灵魂词汇</h1>
-    <div style="text-align: center;"><span class="sub">灵魂觉醒 · 词汇大师挑战</span></div>
+    <div style="text-align: center;"><span class="sub">灵魂觉醒 · 词汇大师挑战 (11关)</span></div>
 
     <div class="info-bar">
         <span class="level-box">第 <span id="levelNum">1</span> / <span id="totalLevels"></span> 关</span>
@@ -545,8 +542,9 @@
         } catch(e) {}
     }
 
-    // ==================== 单词词库 (共60对，每关12对，共5关) ====================
-    const FULL_PAIRS = [
+    // ==================== 完整单词词库 ====================
+    // 原有60对单词（第1-5关）
+    const ORIGINAL_PAIRS = [
         { en: "efforts", zh: "努力" },
         { en: "achievements", zh: "成就" },
         { en: "expectations", zh: "期望" },
@@ -609,7 +607,74 @@
         { en: "torn down", zh: "拆毁 / 拆除" }
     ];
 
-    // 构建关卡数据：每关12对（24个单词卡片），共5关
+    // 新增单词（共66对，第6-11关）
+    const NEW_PAIRS = [
+        { en: "predicted", zh: "预测" },
+        { en: "enjoyed", zh: "享受" },
+        { en: "hated", zh: "讨厌" },
+        { en: "pursued", zh: "追求" },
+        { en: "curious", zh: "好奇的" },
+        { en: "lonely", zh: "孤独的" },
+        { en: "friendly", zh: "友好的" },
+        { en: "independent", zh: "独立的" },
+        { en: "experience", zh: "经验 / 经历" },
+        { en: "position", zh: "位置 / 职位" },
+        { en: "result", zh: "结果" },
+        { en: "behavior", zh: "行为" },
+        { en: "options", zh: "选择" },
+        { en: "expectations", zh: "期望" },
+        { en: "challenges", zh: "挑战" },
+        { en: "grades", zh: "成绩" },
+        { en: "warned", zh: "警告" },
+        { en: "forced", zh: "强迫" },
+        { en: "taught", zh: "教导" },
+        { en: "allowed", zh: "允许" },
+        { en: "explode", zh: "爆炸" },
+        { en: "export", zh: "出口" },
+        { en: "explore", zh: "探索" },
+        { en: "expand", zh: "扩大" },
+        { en: "atmosphere", zh: "气氛 / 大气" },
+        { en: "purpose", zh: "目的" },
+        { en: "invitation", zh: "邀请" },
+        { en: "origin", zh: "起源" },
+        { en: "attitude", zh: "态度" },
+        { en: "eye-opener", zh: "令人大开眼界的事物" },
+        { en: "record-holder", zh: "纪录保持者" },
+        { en: "mixture", zh: "混合物" },
+        { en: "denied", zh: "否认" },
+        { en: "pictured", zh: "想象 / 描绘" },
+        { en: "declared", zh: "宣布" },
+        { en: "postponed", zh: "推迟" },
+        { en: "settling into", zh: "适应 / 安顿下来" },
+        { en: "figuring out", zh: "弄清楚" },
+        { en: "carrying out", zh: "执行" },
+        { en: "knocking into", zh: "撞上" },
+        { en: "excuse", zh: "借口" },
+        { en: "patience", zh: "耐心" },
+        { en: "intention", zh: "意图" },
+        { en: "freedom", zh: "自由" },
+        { en: "why", zh: "为什么" },
+        { en: "how", zh: "如何" },
+        { en: "when", zh: "什么时候" },
+        { en: "where", zh: "哪里" },
+        { en: "house", zh: "房子" },
+        { en: "village", zh: "村庄" },
+        { en: "company", zh: "公司 / 陪伴" },
+        { en: "laboratory", zh: "实验室" },
+        { en: "proud", zh: "骄傲的" },
+        { en: "confused", zh: "困惑的" },
+        { en: "upset", zh: "沮丧的 / 不安的" },
+        { en: "satisfied", zh: "满意的" },
+        { en: "point", zh: "点 / 要点" },
+        { en: "power", zh: "力量 / 权力" },
+        { en: "existence", zh: "存在" },
+        { en: "end", zh: "结束 / 末端" }
+    ];
+
+    // 合并所有单词对
+    const FULL_PAIRS = [...ORIGINAL_PAIRS, ...NEW_PAIRS];
+
+    // 构建关卡数据：每关12对（24个单词卡片），共11关（原有5关 + 新增6关）
     const PAIRS_PER_LEVEL = 12;
     const levelsData = [];
     for (let i = 0; i < FULL_PAIRS.length; i += PAIRS_PER_LEVEL) {
