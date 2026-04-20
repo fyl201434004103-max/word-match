@@ -35,7 +35,7 @@
 
         h1 {
             text-align: center;
-            font-size: 1.8rem;
+            font-size: 2.2rem;
             margin: 0 0 5px;
             color: #222;
             letter-spacing: 1px;
@@ -48,11 +48,11 @@
             display: inline-block;
             width: auto;
             margin: 0 auto 15px;
-            padding: 6px 18px;
+            padding: 8px 22px;
             border-radius: 30px;
             color: #495057;
             font-weight: bold;
-            font-size: 0.85rem;
+            font-size: 1.0rem;
         }
 
         .info-bar {
@@ -60,22 +60,22 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 12px;
             background: #f8f9fa;
-            padding: 10px 18px;
+            padding: 12px 20px;
             border-radius: 40px;
             margin-bottom: 20px;
             border: 1px solid #dee2e6;
         }
 
         .level-box, .score-box, .timer-box {
-            padding: 6px 18px;
+            padding: 8px 22px;
             border-radius: 30px;
             font-weight: 800;
-            font-size: 1rem;
+            font-size: 1.1rem;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
         }
 
         .level-box, .score-box, .timer-box {
@@ -99,8 +99,8 @@
             background: #fff;
             border: 1px solid #ced4da;
             border-radius: 30px;
-            padding: 6px 12px;
-            font-size: 0.9rem;
+            padding: 8px 16px;
+            font-size: 1.0rem;
             font-weight: 600;
             font-family: inherit;
             color: #212529;
@@ -112,8 +112,8 @@
             background: #6c757d;
             border: none;
             color: white;
-            padding: 6px 20px;
-            font-size: 0.9rem;
+            padding: 8px 24px;
+            font-size: 1.0rem;
             font-weight: 600;
             border-radius: 30px;
             cursor: pointer;
@@ -125,39 +125,40 @@
         .message-area {
             background: #f8f9fa;
             text-align: center;
-            padding: 12px;
+            padding: 14px;
             border-radius: 40px;
             margin-bottom: 20px;
             font-weight: bold;
             color: #212529;
             border: 1px solid #dee2e6;
-            font-size: 0.95rem;
+            font-size: 1.05rem;
         }
 
+        /* 四行六列网格布局 */
         .cards-grid {
             display: grid;
-            grid-template-rows: repeat(6, auto);
-            grid-template-columns: repeat(8, 1fr);
-            gap: 10px;
+            grid-template-rows: repeat(4, auto);
+            grid-template-columns: repeat(6, 1fr);
+            gap: 12px;
             margin-bottom: 20px;
         }
 
         .card {
             background: #ffffff;
-            border-radius: 14px;
-            padding: 12px 3px;
+            border-radius: 16px;
+            padding: 16px 6px;
             text-align: center;
             font-weight: 700;
             cursor: pointer;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
             transition: all 0.15s ease;
             border: 1px solid #dee2e6;
-            font-size: 0.8rem;
+            font-size: 0.95rem;
             word-break: break-word;
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 70px;
+            min-height: 90px;
             text-transform: lowercase;
         }
 
@@ -194,14 +195,14 @@
         .next-info {
             text-align: center;
             margin-top: 10px;
-            font-size: 0.9rem;
+            font-size: 1.05rem;
             font-weight: bold;
             background: #e9ecef;
             display: inline-block;
             width: auto;
             margin-left: auto;
             margin-right: auto;
-            padding: 6px 24px;
+            padding: 8px 28px;
             border-radius: 40px;
             color: #212529;
         }
@@ -209,14 +210,14 @@
         footer {
             text-align: center;
             margin-top: 18px;
-            font-size: 0.7rem;
+            font-size: 0.85rem;
             font-weight: 500;
             color: #6c757d;
             background: #f8f9fa;
             width: fit-content;
             margin-left: auto;
             margin-right: auto;
-            padding: 4px 16px;
+            padding: 6px 20px;
             border-radius: 30px;
         }
 
@@ -237,17 +238,17 @@
         .timeout-dialog {
             background: white;
             border-radius: 30px;
-            padding: 30px 40px;
+            padding: 35px 45px;
             text-align: center;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
             animation: slideUp 0.3s ease;
         }
 
         .timeout-dialog p {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: bold;
             color: #ff6b6b;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .timeout-dialog button {
@@ -255,8 +256,8 @@
             color: white;
             border: none;
             border-radius: 40px;
-            padding: 12px 30px;
-            font-size: 1.1rem;
+            padding: 14px 35px;
+            font-size: 1.3rem;
             font-weight: bold;
             cursor: pointer;
             font-family: inherit;
@@ -284,17 +285,17 @@
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(8px);
             border-radius: 40px;
-            padding: 6px 16px;
+            padding: 8px 18px;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
             box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
             border: 1px solid #e0e0e0;
             z-index: 100;
         }
 
         .music-info {
-            font-size: 0.75rem;
+            font-size: 0.9rem;
             font-weight: 600;
             color: #333;
         }
@@ -302,9 +303,9 @@
         .music-btn {
             background: none;
             border: none;
-            font-size: 1.1rem;
+            font-size: 1.3rem;
             cursor: pointer;
-            padding: 4px 8px;
+            padding: 6px 10px;
             border-radius: 50%;
             transition: background 0.2s;
             color: #555;
@@ -314,17 +315,17 @@
         }
 
         .volume-slider {
-            width: 60px;
-            height: 4px;
+            width: 70px;
+            height: 5px;
             -webkit-appearance: none;
             background: #ddd;
-            border-radius: 2px;
+            border-radius: 3px;
             outline: none;
         }
         .volume-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 12px;
-            height: 12px;
+            width: 14px;
+            height: 14px;
             border-radius: 50%;
             background: #2196f3;
             cursor: pointer;
@@ -338,9 +339,9 @@
             color: white;
             border: none;
             border-radius: 40px;
-            padding: 8px 18px;
+            padding: 10px 22px;
             cursor: pointer;
-            font-size: 0.8rem;
+            font-size: 0.95rem;
             font-weight: bold;
             z-index: 100;
             font-family: inherit;
@@ -350,59 +351,72 @@
             opacity: 0.8;
         }
 
-        @media (max-width: 800px) {
+        /* 手机小屏幕适配 */
+        @media (max-width: 600px) {
             .cards-grid {
-                grid-template-columns: repeat(4, 1fr);
                 gap: 8px;
             }
             .card {
-                padding: 10px 2px;
-                font-size: 0.7rem;
-                min-height: 60px;
+                padding: 12px 4px;
+                font-size: 0.75rem;
+                min-height: 70px;
             }
-        }
-
-        @media (max-width: 500px) {
-            .cards-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        @media (max-width: 600px) {
             h1 {
-                font-size: 1.5rem;
+                font-size: 1.6rem;
             }
             .level-box, .score-box, .timer-box {
-                font-size: 0.8rem;
-                padding: 4px 12px;
+                font-size: 0.9rem;
+                padding: 6px 14px;
             }
             .btn-reset {
-                padding: 5px 16px;
-                font-size: 0.8rem;
+                padding: 6px 18px;
+                font-size: 0.85rem;
             }
             .message-area {
-                font-size: 0.8rem;
+                font-size: 0.9rem;
             }
             .level-selector {
-                font-size: 0.75rem;
-                padding: 4px 8px;
+                font-size: 0.85rem;
+                padding: 6px 10px;
             }
             .music-player {
                 bottom: 10px;
                 left: 10px;
-                padding: 4px 10px;
+                padding: 5px 12px;
             }
             .download-btn {
                 bottom: 10px;
                 right: 10px;
-                padding: 6px 12px;
-                font-size: 0.7rem;
+                padding: 7px 14px;
+                font-size: 0.8rem;
             }
             .timeout-dialog {
-                padding: 20px 30px;
+                padding: 25px 35px;
             }
             .timeout-dialog p {
-                font-size: 1.2rem;
+                font-size: 1.4rem;
+            }
+            .timeout-dialog button {
+                padding: 10px 25px;
+                font-size: 1.1rem;
+            }
+        }
+
+        /* 横屏适配 */
+        @media (orientation: landscape) and (max-height: 500px) {
+            .cards-grid {
+                gap: 6px;
+            }
+            .card {
+                padding: 8px 3px;
+                font-size: 0.7rem;
+                min-height: 55px;
+            }
+            .game-container {
+                padding: 12px 12px 20px;
+            }
+            .info-bar {
+                margin-bottom: 12px;
             }
         }
     </style>
@@ -410,7 +424,7 @@
 <body>
 <div class="game-container">
     <h1>📖 单词消消乐 · 灵魂词汇</h1>
-    <div style="text-align: center;"><span class="sub">每关12对单词 · 灵魂觉醒挑战</span></div>
+    <div style="text-align: center;"><span class="sub">灵魂觉醒 · 词汇大师挑战</span></div>
 
     <div class="info-bar">
         <span class="level-box">第 <span id="levelNum">1</span> / <span id="totalLevels"></span> 关</span>
@@ -595,7 +609,7 @@
         { en: "torn down", zh: "拆毁 / 拆除" }
     ];
 
-    // 构建关卡数据：每关12对（24个单词），共5关（60对）
+    // 构建关卡数据：每关12对（24个单词卡片），共5关
     const PAIRS_PER_LEVEL = 12;
     const levelsData = [];
     for (let i = 0; i < FULL_PAIRS.length; i += PAIRS_PER_LEVEL) {
@@ -615,7 +629,7 @@
     let matchedCountCurr = 0;
     let lock = false;
     let timerInterval = null;
-    let timeLeft = 50;  // 每关50秒
+    let timeLeft = 50;
     let isTimeoutShowing = false;
 
     const levelSelect = document.getElementById('levelSelect');
