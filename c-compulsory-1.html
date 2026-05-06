@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>单词消消乐 · 倒计时挑战版</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: #f0f2f5;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 12px;
+            position: relative;
+        }
+
+        .game-container {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 20px 18px 30px;
+            max-width: 100%;
+            width: 100%;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+        }
+
+        /* 全局字号加大两个级别 */
+        h1 {
+            text-align: center;
+            font-size: 2.2rem;
+            margin: 0 0 5px;
+            color: #222;
+            letter-spacing: 1px;
+            font-weight: 800;
+        }
+
+        .sub {
+            text-align: center;
+            background: #e9ecef;
+            display: inline-block;
+            width: auto;
+            margin: 0 auto 15px;
+            padding: 8px 22px;
+            border-radius: 30px;
+            color: #495057;
+            font-weight: bold;
+            font-size: 1.0rem;
+        }
+
+        .info-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            background: #f8f9fa;
+            padding: 12px 20px;
+            border-radius: 40px;
+            margin-bottom: 20px;
+            border: 1px solid #dee2e6;
+        }
+
+        .level-box, .score-box, .timer-box {
+            padding: 8px 22px;
+            border-radius: 30px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .level-box, .score-box, .timer-box {
+            background: #e9ecef;
+            color: #212529;
+        }
+
+        .timer-box.warning {
+            background: #f8d7da;
+            color: #721c24;
+            animation: pulse 0.5s ease-in-out;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .level-selector {
+            background: #fff;
+            border: 1px solid #ced4da;
+            border-radius: 30px;
+            padding: 8px 16px;
+            font-size: 1.0rem;
+            font-weight: 600;
+            font-family: inherit;
+            color: #212529;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .btn-reset {
+            background: #6c757d;
+            border: none;
+            color: white;
+            padding: 8px 24px;
+            font-size: 1.0rem;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: inherit;
+            transition: opacity 0.2s;
+        }
+        .btn-reset:active { opacity: 0.8; }
+
+        .message-area {
+            background: #f8f9fa;
+            text-align: center;
+            padding: 14px;
+            border-radius: 40px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: #212529;
+            border: 1px solid #dee2e6;
+            font-size: 1.05rem;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-rows: repeat(4, auto);
+            grid-template-columns: repeat(6, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 16px 6px;
+            text-align: center;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+            transition: all 0.15s ease;
+            border: 1px solid #dee2e6;
+            font-size: 1.0rem;
+            word-break: break-word;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 95px;
+            text-transform: lowercase; /* 强制小写 */
+        }
+
+        .card.word-card {
+            background: #fff3e0;
+            border-color: #ffc107;
+            color: #856404;
+        }
+
+        .card.def-card {
+            background: #e3f2fd;
+            border-color: #2196f3;
+            color: #0d47a1;
+        }
+
+        .card.selected {
+            transform: scale(0.97);
+            background: #e9ecef;
+            border-color: #adb5bd;
+        }
+
+        .card.matched {
+            visibility: hidden;
+            pointer-events: none;
+            opacity: 0;
+            transform: scale(0.85);
+            transition: visibility 0.2s, opacity 0.2s, transform 0.2s;
+        }
+
+        .card:active:not(.matched) {
+            transform: scale(0.97);
+        }
+
+        .next-info {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 1.05rem;
+            font-weight: bold;
+            background: #e9ecef;
+            display: inline-block;
+            width: auto;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 8px 28px;
+            border-radius: 40px;
+            color: #212529;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 18px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #6c757d;
+            background: #f8f9fa;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 6px 20px;
+            border-radius: 30px;
+        }
+
+        /* 超时弹窗样式 */
+        .timeout-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .timeout-dialog {
+            background: white;
+            border-radius: 30px;
+            padding: 35px 45px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s ease;
+        }
+
+        .timeout-dialog p {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ff6b6b;
+            margin-bottom: 25px;
+        }
+
+        .timeout-dialog button {
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 40px;
+            padding: 14px 35px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            cursor: pointer;
+            font-family: inherit;
+            transition: opacity 0.2s;
+        }
+
+        .timeout-dialog button:active {
+            opacity: 0.8;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .music-player {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            border-radius: 40px;
+            padding: 8px 18px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+            border: 1px solid #e0e0e0;
+            z-index: 100;
+        }
+
+        .music-info {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .music-btn {
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            cursor: pointer;
+            padding: 6px 10px;
+            border-radius: 50%;
+            transition: background 0.2s;
+            color: #555;
+        }
+        .music-btn:active {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .volume-slider {
+            width: 70px;
+            height: 5px;
+            -webkit-appearance: none;
+            background: #ddd;
+            border-radius: 3px;
+            outline: none;
+        }
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #2196f3;
+            cursor: pointer;
+        }
+
+        .download-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 40px;
+            padding: 10px 22px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: bold;
+            z-index: 100;
+            font-family: inherit;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        .download-btn:active {
+            opacity: 0.8;
+        }
+
+        @media (max-width: 600px) {
+            .cards-grid {
+                gap: 8px;
+            }
+            .card {
+                padding: 12px 4px;
+                font-size: 0.85rem;
+                min-height: 75px;
+            }
+            h1 {
+                font-size: 1.6rem;
+            }
+            .level-box, .score-box, .timer-box {
+                font-size: 0.9rem;
+                padding: 6px 14px;
+            }
+            .btn-reset {
+                padding: 6px 18px;
+                font-size: 0.85rem;
+            }
+            .message-area {
+                font-size: 0.9rem;
+            }
+            .level-selector {
+                font-size: 0.85rem;
+                padding: 6px 10px;
+            }
+            .music-player {
+                bottom: 10px;
+                left: 10px;
+                padding: 5px 12px;
+            }
+            .download-btn {
+                bottom: 10px;
+                right: 10px;
+                padding: 7px 14px;
+                font-size: 0.8rem;
+            }
+            .timeout-dialog {
+                padding: 25px 35px;
+            }
+            .timeout-dialog p {
+                font-size: 1.4rem;
+            }
+            .timeout-dialog button {
+                padding: 10px 25px;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="game-container">
+    <h1>📖 单词消消乐 · 倒计时挑战</h1>
+    <div style="text-align: center;"><span class="sub">unit 7 · unit 8 · unit 9 完整版</span></div>
+
+    <div class="info-bar">
+        <span class="level-box">第 <span id="levelNum">1</span> / <span id="totalLevels"></span> 关</span>
+        <span class="score-box">✅ <span id="matchedCount">0</span> / <span id="totalPairs"></span></span>
+        <span class="timer-box" id="timerBox">⏱️ <span id="timerSeconds">50</span> 秒</span>
+        <select id="levelSelect" class="level-selector"></select>
+        <button class="btn-reset" id="resetGameBtn">🔄 重玩本关</button>
+    </div>
+    <div class="message-area" id="messageBox">
+        💡 点击单词卡，再点击释义卡配对 | 50秒内完成挑战！
+    </div>
+
+    <div id="cardsGrid" class="cards-grid"></div>
+    <div id="nextInfo" class="next-info"></div>
+    <footer>🎯 全部配对自动下一关 | 超时弹出继续窗口 | 配对错误会重新洗牌</footer>
+</div>
+
+<!-- 音乐播放器 -->
+<div class="music-player" id="musicPlayer">
+    <div class="music-info">🎵 轻柔学习音乐</div>
+    <button class="music-btn" id="playPauseBtn">⏸</button>
+    <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="40">
+    <button class="music-btn" id="muteBtn">🔊</button>
+</div>
+<button class="download-btn" id="downloadBtn">⬇️ 下载本游戏</button>
+
+<script>
+    // ==================== 背景音乐 (轻柔放松) ====================
+    const bgmUrl = "https://cdn.pixabay.com/download/audio/2022/01/18/audio_d046da1c6f.mp3";
+    
+    let audio = null;
+    let isPlaying = false;
+    let isMuted = false;
+    let volume = 40;
+
+    function initAudio() {
+        if (audio) return;
+        audio = new Audio(bgmUrl);
+        audio.loop = true;
+        audio.volume = volume / 100;
+    }
+
+    function playMusic() {
+        if (!audio) initAudio();
+        audio.play().then(() => {
+            isPlaying = true;
+            document.getElementById('playPauseBtn').innerText = '⏸';
+        }).catch(e => {
+            console.log("自动播放被阻止，需要用户交互");
+            isPlaying = false;
+            document.getElementById('playPauseBtn').innerText = '▶';
+        });
+    }
+
+    function pauseMusic() {
+        if (audio) {
+            audio.pause();
+            isPlaying = false;
+            document.getElementById('playPauseBtn').innerText = '▶';
+        }
+    }
+
+    function togglePlay() {
+        if (!audio) initAudio();
+        if (isPlaying) {
+            pauseMusic();
+        } else {
+            playMusic();
+        }
+    }
+
+    function setVolume(val) {
+        volume = val;
+        if (audio) {
+            audio.volume = volume / 100;
+        }
+        document.getElementById('volumeSlider').value = volume;
+        if (volume === 0) {
+            isMuted = true;
+            document.getElementById('muteBtn').innerText = '🔇';
+        } else {
+            isMuted = false;
+            document.getElementById('muteBtn').innerText = '🔊';
+        }
+    }
+
+    function toggleMute() {
+        if (isMuted) {
+            setVolume(40);
+        } else {
+            setVolume(0);
+        }
+    }
+
+    document.getElementById('playPauseBtn').addEventListener('click', togglePlay);
+    document.getElementById('volumeSlider').addEventListener('input', (e) => {
+        setVolume(parseInt(e.target.value));
+    });
+    document.getElementById('muteBtn').addEventListener('click', toggleMute);
+
+    // ==================== 音效系统 (超级玛丽跳跃音效) ====================
+    let audioCtx = null;
+    let soundAllowed = false;
+
+    function playJumpSound() {
+        if (!soundAllowed) return;
+        try {
+            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const now = audioCtx.currentTime;
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(800, now);
+            osc.frequency.exponentialRampToValueAtTime(1200, now + 0.12);
+            gain.gain.setValueAtTime(0.15, now);
+            gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.25);
+            osc.start();
+            osc.stop(now + 0.25);
+        } catch(e) { console.log("jump sound error", e); }
+    }
+
+    function enableSound() {
+        if (soundAllowed) return;
+        try {
+            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const gain = audioCtx.createGain();
+            gain.connect(audioCtx.destination);
+            gain.gain.value = 0.0001;
+            const osc = audioCtx.createOscillator();
+            osc.connect(gain);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.01);
+            audioCtx.resume();
+            soundAllowed = true;
+        } catch(e) { console.log("enableSound error", e); }
+    }
+
+    // ==================== 完整关卡数据 (所有单词已转为小写) ====================
+    const levelsData = [
+    // 第1-15个
+    { words: ["trait","niece","nephew","humour","passionate","outgoing","flu","host","incredible","occasionally","emotional","extremely","grateful","hydrogen","rocket"],
+      defs: ["特性, 品质","侄女, 外甥女","侄子, 外甥","幽默感","热爱的, 酷爱的; 具有强烈信念的","外向的, 好交际的","流行性感冒, 流感","主办; 做......的东道主 n. 主人; 主持人","极好的; 难以置信的","偶尔; 偶然","激起感情的; 情感上的","极度, 极其","感激的, 感谢的","氢","火箭"] },
+    // 第16-30个
+    { words: ["pour","pour into","fuel","lack","presentation","a couple of","used to","behaviour","drag","acid","onion","access","worthwhile","educationalist","practical"],
+      defs: ["灌, 注, 倒","投入 (倒) ......于某物","燃料","缺乏","报告; 陈述, 说明","一些, 几个; 一双, 一对","过去经常, 曾经","行为, 举止","拖, 拉","酸","洋葱","进入; 接触的机会","值得做的; 重要的; 有益的","教育(学)家","实际的; 实践的; 切实可行的"] },
+    // 第31-45个
+    { words: ["angle","triangle","for the first time","feedback","preference","handle","upset","ashamed","intention","demanding","effective","raise","highlight","tense","manner"],
+      defs: ["角","三角形","初次, 第一次","反馈意见","偏爱, 偏好","处理(难题); 应付(局面)","烦恼的, 心烦意乱的 vt. 使生气, 使心烦意乱","羞愧的；内疚的；惭愧的","意图，目的；打算","要求严格的；费力的","有效的","提出，提起","标出；突出显示","时态","方式，方法"] },
+    // 第46-60个
+    { words: ["sensitive","social networking","socialise","laptop","constantly","app","dorm","flow","associate","associate with","barely","reserved","wired","distracted","reality"],
+      defs: ["敏感的；善解人意的","社交网络","交友；交际；交往","笔记本电脑，便携式电脑","持续不断地","应用程序","寝室，学生宿舍","流动；流，流动","与某人交往","与某人交往","几乎不","含蓄的；内敛的","联网的；极其兴奋的","心神不定的，精神无法集中的","现实；真实"] },
+    // 第61-75个
+    { words: ["million","obsess","obsess over","mate","dominate","deadline","scroll","inch","stimulation","chase","desperate","intense","depressed","delay","chatter"],
+      defs: ["百万","使迷恋","对......过分担心","朋友，伙伴","主宰，支配，控制","截止日期，最后期限","上下滚动","英寸","刺激","努力赢得 n. 追逐，追赶","拼命的；绝望的","紧张的，激烈的；剧烈的","沮丧的，忧愁的","推迟，延期","喋喋不休"] },
+    // 第76-90个
+    { words: ["chatter away","bend","extraordinary","rude","complain","appointment","alcoholic","booze","hard-wired","invitation","organise","behalf","on behalf of sb","topic","innovation"],
+      defs: ["喋喋不休","弯腰；俯身","令人惊奇的，异乎寻常的","无礼的","抱怨；不满；发牢骚","约定；约会","酗酒者，嗜酒成瘾者 adj.（含）酒精的","酒","硬件控制的；天生的","邀请","组织, 筹划","代表...","代表某人","话题, 题目","革新, 创新"] },
+    // 第91-105个
+    { words: ["competitor","clarity","fluency","progression","engagement","take up","sincerely","belong","belong to","approval","defend","principle","unmotivated","politics","contrast"],
+      defs: ["选手, 参赛者","清楚, 清晰","流畅, 熟练","发展, 变化","参与","占据","真诚地, 由衷地","应在(某处); 适应","是......的成员; 属于","赞许; 同意","保护, 保卫","原则; 行为准则","不积极的, 不主动的","政治, 政治活动","差异, 差别 vt. 形成对比"] },
+    // 第106-120个
+    { words: ["in contrast to","motivation","persistent","determined","optimistic","astronaut","committed","disciplined","enthusiastic","ambitious","appreciative","make sense","injury","career","cooperation"],
+      defs: ["和......对比","动力, 积极性","坚持的; 执意的","坚定的, 坚决的","乐观的, 乐观主义的","宇航员","坚定的; 尽心尽力的","遵守纪律的","热心的, 热衷的","有抱负的, 有雄心的","感激的","有意义; 解释得通","伤, 损害","职业, 事业","合作, 协作"] },
+    // 第121-135个
+    { words: ["employee","millionaire","comfortably","symbol","ultimate","professor","fortune","dormitory","furniture","appreciate","hunger","get on","guilty","drop out","hybrid"],
+      defs: ["雇员","百万富翁","舒服地, 舒适地","象征, 标志","最后的, 最终的","教授","大笔的钱, 巨款","寝室, 学生宿舍","家具","欣赏; 赏识","饥饿, 饥荒","发迹; 出人头地","内疚的, 羞愧的","退出, 脱离; 辍学","杂交的 n. 杂交种; 混合体"] },
+    // 第136-150个
+    { words: ["influential","devote","devote...to","production","vision","telecommunications","championship","publisher","reject","contract","motivating","limit","distraction","convince","extreme"],
+      defs: ["有影响力的","把......奉献给; 专心致力于","致力于","生产; 产量","远见卓识","电信, 电讯","冠军称号, 冠军地位","出版商","拒绝接受","合同; 契约","起激励作用的; 激发(人)的","限制, 限定","使人分心的事物","说服; 使确信","极端"] },
+    // 第151-165个
+    { words: ["strive","encyclopaedia","entry","academic","ruin","skip","defensive","element","workout","intensity","selfish","sacrifice","countless","hire","triathlete"],
+      defs: ["努力; 奋斗","百科全书","条目","学术的","毁掉, 糟蹋, 毁坏","不做(本来应做的事); 蹦跳着走","戒备的, 自卫的","基本部分; 要素","训练, 锻炼","强度; 强烈","自私的, 自私自利的","牺牲","无数的, 数不尽的","租用","铁人三项运动员"] },
+    // 第166-180个
+    { words: ["boil","boil down to sth","enormous","stay in","length","rugby","apply oneself to sth","apart","set sb/sth apart","platform","injured","outstanding","average","normal","iron"],
+      defs: ["(使)沸腾, 煮沸","归结为; 要点是","巨大的, 庞大的","待在家里","长度","(英式)橄榄球","努力; 专心致志于某事","分开; 散开","使与众不同","舞台; 月台","受伤的","杰出的, 优秀的","平均水平；平均数","正常的，平常的","铁；熨斗"] },
+    // 第181-195个
+    { words: ["hammer","recognised","contribute","style","retire","retire from","leadership","devotion","advanced","forwards","collapse","reference","faith","discipline","found"],
+      defs: ["榔头；锤子","公认的；经过检验的","增进；捐献；促成","方式，特点","退休；退职","从......退休","领导；领导地位","奉献；忠心","先进的；高级的；晚期的","向前","突然倒下；倒塌","推荐信；谈到，提及","相信；信任","自制力 vt. 惩罚，处罚","创立；创建"] },
+    // 第196-210个
+    { words: ["rejection","fashion","designer","bitterly","promotion","bridal","label","entrance","income","conservation","destroy","plastic","mining","item","recycle"],
+      defs: ["嫌弃；拒绝接受","时尚","设计师，设计者","痛苦地；愤恨地","提升，晋升","婚礼的；新娘的","标签，标记 vt. 贴标签于","进入许可；入口","收入；收益","保护","破坏；毁掉","塑料制的","采矿业","一项，一条","再利用，回收利用"] },
+    // 第211-225个
+    { words: ["unrecyclable","informative","threat","switch","have a role","do one's part","rhino","illegally","hunt","horn","extinct","incredibly","urgent","die out","species"],
+      defs: ["不可回收的","有教育意义的；知识性强的","威胁；(灾难等坏事)发生的可能","转换，改变","起某种作用","尽自己的职责","犀牛","非法地，违法地","猎取，猎杀","(牛、羊等头上的)角","灭绝的，绝种的","非常地，极端地","紧急的，急迫的","消失；绝迹，灭绝","物种，种"] },
+    // 第226-240个
+    { words: ["wipe","wipe out","unusual","mass","varied","asteroid","decrease","blame","be to blame","affect","be at risk","endangered","solar","hatch","restore"],
+      defs: ["擦；拭","彻底毁灭","异常的；不平常的","大量的","各种各样的，形形色色的","小行星","减少；减少的量 vi. & vt. 减少","责怪，指责","(对某事)负有责任","影响","处境危险，受到威胁","濒危的","太阳光（能）的","(使)孵化","(使)恢复"] },
+    // 第241-255个
+    { words: ["packet","set out","packaging","coconut","consumer","wasteful","wrap","shell","transportation","dirt","swallow","realistic","innovative","refillable","aware"],
+      defs: ["小包，小盒","开始做某事，着手进行","包装盒（瓶、袋），包装材料","椰子","消费者","浪费的；挥霍的","包，裹","壳；贝壳","交通运输系统，运输方式","灰尘，尘土","吞下，咽下","现实的，实际的","新颖的，创新的，革新的","可再填充的","意识到的，明白的"] },
+    // 第256-270个
+    { words: ["collection","bin","anxious","reusable","carton","cutlery","chopsticks","council","destruction","stuck","jam","traffic jam","annoyed","stressed out","roadworks"],
+      defs: ["收集；收藏品；专辑","垃圾箱","焦虑的，不安的","可再使用的，可重复使用的","硬纸盒；塑料盒","餐具","筷子","委员会；理事会","破坏，毁坏","卡住的，无法移动的","拥挤，堵塞；果酱","交通堵塞","烦恼的，生气的","焦虑的","道路施工"] },
+    // 第271-285个
+    { words: ["anger","decade","gas","cancer","relate","be related to","regular","suit","sum","sum up","essay","organic","involve","institute","poultry"],
+      defs: ["愤怒；怒气","十年，十年期","气，气体","癌症","相联系，有关联","与......有关联","定期的，有规律的","适合；n. 套装","概括，总结 n. 金额，款项；总数","概括，总结","论说文；散文","不使用化肥的，有机的，绿色的","包含，需要","机构；研究院","家禽肉，家禽"] },
+    // 第286-300个
+    { words: ["billion","opponent","cruel","instance","for instance","claim","chemical","drug","committee","temple","Confucius","memorial","carve","valley","scenic"],
+      defs: ["十亿","反对者；对手，敌手","残忍的","例子，例如","例如","声称；断言；主张 n. 声称；(根据权利而提出的)要求","化学品 adj. 化学的","药物，药材；毒品","委员会","庙宇，寺院","孔子","纪念馆；纪念碑 adj.(对逝者)纪念的，追悼的","雕，刻","谷，山谷","景色优美的"] },
+    // 第301-307个（最后7个）
+    { words: ["historic","thunderstorm","typhoon","agricultural","Atlantic"],
+      defs: ["古老的；历史上重要的","雷暴","台风","农业的","大西洋的"] }
+];
+
+    // ==================== 游戏状态 ====================
+    let currentLevel = 0;
+    let currentPairs = [];
+    let selectedCardId = null;
+    let matchedCountCurr = 0;
+    let lock = false;
+    let timerInterval = null;
+    let timeLeft = 50;          // 倒计时 50 秒
+    let isTimeoutShowing = false;
+
+    const levelSelect = document.getElementById('levelSelect');
+    const resetBtn = document.getElementById('resetGameBtn');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const timerSecondsSpan = document.getElementById('timerSeconds');
+    const timerBox = document.getElementById('timerBox');
+
+    // 倒计时控制
+    function stopTimer() {
+        if (timerInterval) {
+            clearInterval(timerInterval);
+            timerInterval = null;
+        }
+    }
+
+    function startTimer() {
+        stopTimer();
+        timeLeft = 50;
+        timerSecondsSpan.innerText = timeLeft;
+        timerBox.classList.remove('warning');
+        
+        timerInterval = setInterval(() => {
+            if (lock) return;
+            if (timeLeft <= 1) {
+                stopTimer();
+                if (!isTimeoutShowing && matchedCountCurr < levelsData[currentLevel].words.length) {
+                    showTimeoutDialog();
+                }
+            } else {
+                timeLeft--;
+                timerSecondsSpan.innerText = timeLeft;
+                if (timeLeft <= 5) {
+                    timerBox.classList.add('warning');
+                } else {
+                    timerBox.classList.remove('warning');
+                }
+            }
+        }, 1000);
+    }
+
+    // 显示超时弹窗
+    function showTimeoutDialog() {
+        if (isTimeoutShowing) return;
+        isTimeoutShowing = true;
+        
+        const overlay = document.createElement('div');
+        overlay.className = 'timeout-overlay';
+        overlay.innerHTML = `
+            <div class="timeout-dialog">
+                <p>⏰ Keep Going!</p>
+                <button id="continueBtn">继续挑战</button>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+        
+        document.getElementById('continueBtn').addEventListener('click', () => {
+            overlay.remove();
+            isTimeoutShowing = false;
+            resetCurrentLevel();
+        });
+    }
+
+    // 洗牌和重置
+    function shuffleArray(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+    }
+
+    function buildPairsForLevel(levelIdx) {
+        const level = levelsData[levelIdx];
+        const pairs = [];
+        let id = 0;
+        for (let i = 0; i < level.words.length; i++) {
+            pairs.push({ id: id++, pairIndex: i, type: 'word', text: level.words[i], matched: false });
+            pairs.push({ id: id++, pairIndex: i, type: 'def', text: level.defs[i], matched: false });
+        }
+        return shuffleArray(pairs);
+    }
+
+    // 重置当前关卡（从当前关卡开始，洗牌）
+    function resetCurrentLevel() {
+        stopTimer();
+        selectedCardId = null;
+        matchedCountCurr = 0;
+        currentPairs = buildPairsForLevel(currentLevel);
+        lock = false;
+        renderGame();
+        startTimer();
+        showMessage(`🃏 卡片已重新洗牌！继续挑战第 ${currentLevel+1} 关`, false);
+    }
+
+    // 重玩按钮功能：从当前关卡开始（洗牌重置）
+    function restartCurrentLevel() {
+        resetCurrentLevel();
+    }
+
+    function showMessage(msg, isError) {
+        const msgBox = document.getElementById('messageBox');
+        msgBox.innerHTML = msg;
+        msgBox.style.background = isError ? '#f8d7da' : '#d4edda';
+        msgBox.style.color = isError ? '#721c24' : '#155724';
+        setTimeout(() => {
+            if (document.getElementById('messageBox').innerHTML === msg) {
+                document.getElementById('messageBox').innerHTML = '💡 点击单词卡，再点击释义卡配对 | 50秒内完成挑战！';
+                document.getElementById('messageBox').style.background = '#f8f9fa';
+                document.getElementById('messageBox').style.color = '#212529';
+            }
+        }, 1500);
+    }
+
+    function renderGame() {
+        const totalPairs = levelsData[currentLevel].words.length;
+        document.getElementById('totalPairs').innerText = totalPairs;
+        document.getElementById('matchedCount').innerText = matchedCountCurr;
+        document.getElementById('levelNum').innerText = currentLevel + 1;
+        document.getElementById('totalLevels').innerText = levelsData.length;
+
+        if (levelSelect.value != currentLevel) {
+            levelSelect.value = currentLevel;
+        }
+
+        const grid = document.getElementById('cardsGrid');
+        grid.innerHTML = '';
+        for (let card of currentPairs) {
+            const cardDiv = document.createElement('div');
+            cardDiv.className = `card ${card.type === 'word' ? 'word-card' : 'def-card'}`;
+            if (card.matched) cardDiv.classList.add('matched');
+            if (selectedCardId === card.id && !card.matched) cardDiv.classList.add('selected');
+            cardDiv.innerText = card.text;
+            cardDiv.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (lock) return;
+                if (card.matched) {
+                    showMessage('🎈 这个词已经配对过啦！', false);
+                    return;
+                }
+                handleCardClick(card.id);
+            });
+            grid.appendChild(cardDiv);
+        }
+
+        if (matchedCountCurr === totalPairs && currentLevel + 1 === levelsData.length) {
+            document.getElementById('nextInfo').innerHTML = '🏆 恭喜通关！ 🏆';
+            stopTimer();
+        } else if (matchedCountCurr === totalPairs) {
+            document.getElementById('nextInfo').innerHTML = '🎉 完成！进入下一关... 🎉';
+            stopTimer();
+            setTimeout(() => {
+                if (currentLevel + 1 < levelsData.length) {
+                    goToLevel(currentLevel + 1);
+                }
+            }, 1000);
+        } else {
+            document.getElementById('nextInfo').innerHTML = '';
+        }
+    }
+
+    function handleCardClick(clickedId) {
+        const clickedCard = currentPairs.find(c => c.id === clickedId);
+        if (!clickedCard || clickedCard.matched) return;
+
+        if (selectedCardId === null) {
+            selectedCardId = clickedCard.id;
+            renderGame();
+            return;
+        }
+
+        const selectedCard = currentPairs.find(c => c.id === selectedCardId);
+        if (!selectedCard || selectedCard.matched) {
+            selectedCardId = null;
+            handleCardClick(clickedId);
+            return;
+        }
+
+        if (selectedCard.id === clickedCard.id) {
+            selectedCardId = null;
+            renderGame();
+            return;
+        }
+
+        const isMatch = (selectedCard.pairIndex === clickedCard.pairIndex && selectedCard.type !== clickedCard.type);
+        if (isMatch) {
+            lock = true;
+            selectedCard.matched = true;
+            clickedCard.matched = true;
+            matchedCountCurr++;
+            playJumpSound();
+            selectedCardId = null;
+            renderGame();
+            lock = false;
+        } else {
+            selectedCardId = null;
+            showMessage(`❌ 配对错误： "${selectedCard.text}" 和 "${clickedCard.text}" 不对应，重新洗牌！`, true);
+            resetCurrentLevel();
+        }
+    }
+
+    function goToLevel(levelIndex) {
+        if (levelIndex < 0 || levelIndex >= levelsData.length) return;
+        stopTimer();
+        currentLevel = levelIndex;
+        selectedCardId = null;
+        matchedCountCurr = 0;
+        currentPairs = buildPairsForLevel(currentLevel);
+        lock = false;
+        renderGame();
+        startTimer();
+        showMessage(`✨ 已跳转到第 ${currentLevel+1} 关 ✨`, false);
+    }
+
+    function initLevelSelect() {
+        levelSelect.innerHTML = '';
+        for (let i = 0; i < levelsData.length; i++) {
+            const option = document.createElement('option');
+            option.value = i;
+            option.textContent = `第 ${i+1} 关 (${levelsData[i].words.length}词)`;
+            levelSelect.appendChild(option);
+        }
+        levelSelect.value = 0;
+        levelSelect.addEventListener('change', (e) => {
+            const newLevel = parseInt(e.target.value);
+            if (!isNaN(newLevel) && newLevel !== currentLevel) {
+                goToLevel(newLevel);
+            }
+        });
+    }
+
+    function downloadGame() {
+        const htmlContent = document.documentElement.outerHTML;
+        const blob = new Blob([htmlContent], { type: 'text/html' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'word_match_game.html';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showMessage('📥 游戏文件已开始下载！', false);
+    }
+
+    // 绑定事件：重玩按钮调用 restartCurrentLevel（从当前关卡开始）
+    resetBtn.addEventListener('click', restartCurrentLevel);
+    downloadBtn.addEventListener('click', downloadGame);
+
+    // 首次点击页面任意位置启用音乐和音效
+    document.body.addEventListener('click', () => {
+        enableSound();
+        if (!audio) {
+            initAudio();
+            playMusic();
+        } else if (!isPlaying) {
+            playMusic();
+        }
+    }, { once: true });
+
+    initLevelSelect();
+    goToLevel(0);
+</script>
+</body>
+</html>
